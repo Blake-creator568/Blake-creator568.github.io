@@ -1,4 +1,873 @@
 <!DOCTYPE html>
+
+<style>
+  /* ==========================================================================
+   ORBIS VOX — EDITORIAL STYLESHEET ("THREE-PIECE SUIT" DESIGN)
+   ========================================================================== */
+
+/* 1. COLOUR PALETTE & TYPOGRAPHY VARIABLES */
+:root {
+  --bg-paper: #faf9f6;          /* Warm off-white newspaper background */
+  --bg-card: #ffffff;           /* Crisp white card surface */
+  --bg-tint: #f2efe9;           /* Subtle warm stone divider tint */
+  --bg-dark: #1a1718;           /* Deep charcoal contrast band */
+  --burgundy-main: #5a1822;     /* Primary deep burgundy accent */
+  --burgundy-deep: #3d0f16;     /* Darker footer/hover burgundy */
+  --red-accent: #8b1e2b;        /* Rich editorial crimson for badges */
+  --ink-black: #161616;         /* Primary headline & body ink */
+  --ink-muted: #4f4b4c;         /* Secondary captions & dates */
+  --border-rule: #d8d3ca;       /* Fine newspaper column divider line */
+
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --radius: 3px;
+  --transition: 0.25s ease;
+}
+
+/* 2. RESET & BASE ACCESSIBILITY */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-paper);
+  color: var(--ink-black);
+  font-family: var(--font-sans);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--red-accent);
+  outline-offset: 3px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* 3. TOP UTILITY BAR */
+.utility-bar {
+  background-color: var(--ink-black);
+  color: #e8e4dc;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.45rem 0;
+  border-bottom: 2px solid var(--burgundy-main);
+}
+
+.utility-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.utility-tagline {
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.14em;
+}
+
+.visitor-badge strong {
+  color: #f3c6cc;
+}
+
+/* 4. MASTHEAD & BRANDING */
+.masthead {
+  background-color: var(--bg-card);
+  border-bottom: 3px double var(--ink-black);
+}
+
+.masthead-inner {
+  padding: 2rem 1.25rem 1.6rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.15rem;
+  text-align: left;
+}
+
+.masthead-logo {
+  width: 74px;
+  height: 74px;
+  object-fit: contain;
+}
+
+.newspaper-title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--ink-black);
+}
+
+.newspaper-slogan {
+  margin: 0.35rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: var(--burgundy-main);
+  text-transform: uppercase;
+}
+
+.editorial-intro {
+  max-width: 650px;
+  margin: 1.1rem auto 0;
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+  border-top: 1px solid var(--border-rule);
+  padding-top: 0.85rem;
+}
+
+/* 5. NAVIGATION BAR & SEARCH */
+.main-nav {
+  border-top: 1px solid var(--border-rule);
+  background-color: var(--bg-paper);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 52px;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: var(--burgundy-main);
+  color: #ffffff;
+  border: none;
+  padding: 0.45rem 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.85rem 0.9rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-black);
+  border-bottom: 3px solid transparent;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--burgundy-main);
+  border-bottom-color: var(--burgundy-main);
+}
+
+.nav-search {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.nav-search input {
+  padding: 0.4rem 0.65rem;
+  border: 1px solid var(--border-rule);
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  background: var(--bg-card);
+  width: 185px;
+}
+
+.nav-search button {
+  padding: 0.42rem 0.75rem;
+  background-color: var(--burgundy-main);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+
+.nav-search button:hover {
+  background-color: var(--burgundy-deep);
+}
+
+/* 6. MAIN LAYOUT & SECTION HEADERS */
+.main-wrapper {
+  padding-top: 2.25rem;
+  padding-bottom: 4rem;
+}
+
+.page-view {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-label-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-kicker {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--burgundy-main);
+  white-space: nowrap;
+}
+
+.kicker-line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--ink-black);
+}
+
+.view-all-link {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--burgundy-main);
+  white-space: nowrap;
+}
+
+.view-all-link:hover {
+  text-decoration: underline;
+}
+
+/* 7. FEATURED LEAD ARTICLE */
+.featured-section {
+  margin-bottom: 3rem;
+}
+
+.featured-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-rule);
+  border-top: 4px solid var(--burgundy-main);
+  padding: 2.25rem;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  cursor: pointer;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.featured-card:hover {
+  box-shadow: 0 10px 28px rgba(22, 22, 22, 0.08);
+  transform: translateY(-2px);
+}
+
+.category-pill {
+  display: inline-block;
+  background-color: var(--burgundy-main);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 2px;
+}
+
+.featured-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 3.2vw, 2.55rem);
+  line-height: 1.18;
+  margin: 0.85rem 0;
+  color: var(--ink-black);
+}
+
+.featured-card:hover .featured-title {
+  color: var(--burgundy-main);
+}
+
+.featured-excerpt {
+  font-size: 1.02rem;
+  color: var(--ink-muted);
+  margin: 0 0 1.25rem;
+}
+
+.featured-aside {
+  background-color: var(--bg-tint);
+  border-left: 3px solid var(--burgundy-main);
+  padding: 1.5rem;
+}
+
+.featured-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--ink-black);
+  margin: 0 0 0.85rem;
+}
+
+.article-meta {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.read-more-cta {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--burgundy-main);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+/* 8. EDITORIAL ARTICLE GRIDS & CARDS */
+.latest-section,
+.community-section {
+  margin-bottom: 3.25rem;
+}
+
+.editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.article-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-rule);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.article-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--burgundy-main);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Make the first card in Latest span 2 columns for newspaper variety */
+.editorial-grid .article-card:first-child {
+  grid-column: span 2;
+  background-color: #fffdfb;
+  border-top: 3px solid var(--ink-black);
+}
+
+.card-title {
+  font-family: var(--font-serif);
+  font-size: 1.32rem;
+  line-height: 1.28;
+  margin: 0.75rem 0 0.65rem;
+  color: var(--ink-black);
+  transition: color var(--transition);
+}
+
+.editorial-grid .article-card:first-child .card-title {
+  font-size: 1.65rem;
+}
+
+.article-card:hover .card-title {
+  color: var(--burgundy-main);
+}
+
+.card-excerpt {
+  font-size: 0.92rem;
+  color: var(--ink-muted);
+  margin: 0 0 1.25rem;
+}
+
+.card-footer {
+  border-top: 1px solid var(--border-rule);
+  padding-top: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+}
+
+/* 9. OPINION & PERSPECTIVES BAND (DISTINCTIVE DARK CONTRAST) */
+.opinion-band {
+  background-color: var(--bg-dark);
+  color: #f5f2eb;
+  padding: 2.5rem 2rem;
+  margin-bottom: 3.25rem;
+  border-top: 4px solid var(--red-accent);
+}
+
+.opinion-band .section-kicker {
+  color: #f3c6cc;
+}
+
+.opinion-band .kicker-line {
+  background-color: #4a4446;
+}
+
+.opinion-band .view-all-link {
+  color: #f3c6cc;
+}
+
+.opinion-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.opinion-card {
+  background-color: #242021;
+  border: 1px solid #3a3436;
+  border-left: 3px solid var(--red-accent);
+  padding: 1.45rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform var(--transition), background-color var(--transition);
+}
+
+.opinion-card:hover {
+  transform: translateY(-3px);
+  background-color: #2c2728;
+}
+
+.opinion-card .card-title {
+  color: #ffffff;
+  font-style: italic;
+}
+
+.opinion-card:hover .card-title {
+  color: #f3c6cc;
+}
+
+.opinion-card .card-excerpt {
+  color: #c9c3c5;
+}
+
+.opinion-card .card-footer {
+  border-top-color: #3a3436;
+  color: #a8a0a2;
+}
+
+/* 10. COMMUNITY GRID */
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+/* 11. HOMEPAGE ABOUT & CONTACT STRIP */
+.home-info-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  border-top: 2px solid var(--ink-black);
+  padding-top: 2.5rem;
+}
+
+.info-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-rule);
+  padding: 1.85rem;
+}
+
+.info-card-accent {
+  background-color: var(--bg-tint);
+  border-left: 4px solid var(--burgundy-main);
+}
+
+.info-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  margin: 0 0 0.75rem;
+}
+
+.direct-email a {
+  color: var(--burgundy-main);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.text-btn {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--burgundy-main);
+}
+
+.text-btn:hover {
+  text-decoration: underline;
+}
+
+/* 12. SINGLE ARTICLE READER VIEW */
+.article-reader {
+  max-width: 760px;
+  margin: 0 auto;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-rule);
+  padding: 2.5rem 3rem;
+}
+
+.back-btn {
+  background: none;
+  border: 1px solid var(--border-rule);
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 1.75rem;
+  border-radius: var(--radius);
+  transition: background-color var(--transition);
+}
+
+.back-btn:hover {
+  background-color: var(--bg-tint);
+}
+
+.reader-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  flex-wrap: wrap;
+}
+
+.reader-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  line-height: 1.18;
+  margin: 1rem 0;
+}
+
+.reader-standfirst {
+  font-size: 1.12rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+  border-bottom: 2px solid var(--ink-black);
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.reader-body p {
+  font-size: 1.06rem;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+  color: var(--ink-black);
+}
+
+.reader-body ul,
+.reader-body ol {
+  margin: 1.25rem 0;
+  padding-left: 1.5rem;
+}
+
+.reader-body li {
+  margin-bottom: 0.65rem;
+  font-size: 1.03rem;
+}
+
+.reader-footer {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-rule);
+}
+
+.reader-share-box {
+  background-color: var(--bg-tint);
+  padding: 1.15rem 1.35rem;
+  border-left: 4px solid var(--burgundy-main);
+  font-size: 0.95rem;
+}
+
+.reader-share-box a {
+  color: var(--burgundy-main);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* 13. ARCHIVE & STATIC PAGES (ABOUT / CONTACT) */
+.archive-header {
+  border-bottom: 2px solid var(--ink-black);
+  padding-bottom: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.archive-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--burgundy-main);
+}
+
+.archive-heading {
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  margin: 0.35rem 0;
+}
+
+.archive-subtitle {
+  margin: 0;
+  color: var(--ink-muted);
+}
+
+.static-page-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-rule);
+  padding: 2.5rem 3rem;
+}
+
+.static-page-inner h2 {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  margin: 0.4rem 0 1.25rem;
+}
+
+.lead-paragraph {
+  font-size: 1.12rem;
+  color: var(--ink-black);
+}
+
+.contact-details-box {
+  margin-top: 1.75rem;
+  background-color: var(--bg-tint);
+  border-left: 4px solid var(--burgundy-main);
+  padding: 1.5rem;
+}
+
+.contact-details-box a {
+  color: var(--burgundy-main);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* 14. LARGE DARK BURGUNDY FOOTER */
+.site-footer {
+  background-color: var(--burgundy-main);
+  color: #f7f3f3;
+  border-top: 5px solid var(--ink-black);
+  padding: 3.5rem 0 1.75rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+  gap: 2.25rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.footer-logo {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  background: #ffffff;
+  border-radius: 50%;
+  padding: 4px;
+}
+
+.footer-title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+}
+
+.footer-slogan {
+  margin: 0.15rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #f3c6cc;
+}
+
+.footer-about {
+  font-size: 0.9rem;
+  color: #e6d8da;
+  margin: 0;
+}
+
+.footer-col h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #f3c6cc;
+  margin: 0 0 0.9rem;
+}
+
+.footer-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-col li {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.footer-col a:hover {
+  text-decoration: underline;
+  color: #ffffff;
+}
+
+.footer-note {
+  font-size: 0.82rem;
+  color: #d9c5c8;
+}
+
+.footer-bottom {
+  padding-top: 1.35rem;
+  text-align: center;
+  font-size: 0.84rem;
+  color: #e6d8da;
+}
+
+/* 15. RESPONSIVE DESIGN (TABLET & MOBILE) */
+@media (max-width: 960px) {
+  .featured-card {
+    grid-template-columns: 1fr;
+  }
+
+  .editorial-grid,
+  .opinion-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .editorial-grid .article-card:first-child {
+    grid-column: span 2;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: inline-block;
+  }
+
+  .nav-container {
+    flex-wrap: wrap;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    border-top: 1px solid var(--border-rule);
+    margin-top: 0.5rem;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: 0.7rem 0.25rem;
+  }
+
+  .editorial-grid,
+  .opinion-grid,
+  .community-grid,
+  .home-info-strip,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .editorial-grid .article-card:first-child {
+    grid-column: span 1;
+  }
+
+  .article-reader,
+  .static-page-inner {
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+/* 16. REDUCED MOTION ACCESSIBILITY */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
@@ -195,7 +1064,10 @@
         </div>
       </div>
     </section>
-
   </main>
 
   <!-- ================= 5. LARGE DARK BURGUNDY FOOTER ================= -->
+
+  <script>
+    
+  </script>
